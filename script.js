@@ -208,3 +208,41 @@ const topbar = document.getElementById('topbar');
 
   restartMemory.addEventListener("click",createMemoryGame);
   createMemoryGame();
+
+// AMPLIAR IMAGENES DE TRABAJOS
+
+const imageLightbox = document.getElementById("imageLightbox");
+const imageLightboxImg = document.getElementById("imageLightboxImg");
+const imageLightboxClose = document.getElementById("imageLightboxClose");
+
+document.querySelectorAll(".work img").forEach((img) => {
+    img.addEventListener("click", () => {
+
+        imageLightboxImg.src = img.src;
+        imageLightbox.classList.add("open");
+        imageLightbox.setAttribute("aria-hidden", "false");
+
+        document.body.style.overflow = "hidden";
+    });
+});
+
+function closeImageLightbox() {
+    imageLightbox.classList.remove("open");
+    imageLightbox.setAttribute("aria-hidden", "true");
+    imageLightboxImg.src = "";
+    document.body.style.overflow = "";
+}
+
+imageLightboxClose.addEventListener("click", closeImageLightbox);
+
+imageLightbox.addEventListener("click", (event) => {
+    if (event.target === imageLightbox) {
+        closeImageLightbox();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && imageLightbox.classList.contains("open")) {
+        closeImageLightbox();
+    }
+});
